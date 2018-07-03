@@ -6,22 +6,22 @@
     * how to pass a value to a script as a global variable
     * how to retrieve a value from the VM
  
-    Communication between C and Lua happens within the 'stack', which is a data
-    structure held within the VM. Lau objects must stay within the VM.
+ Communication between C and Lua happens within the 'stack', which is a data
+ structure held within the VM. Lau objects must stay within the VM.
  
-    The "pushstring()" function takes a C string, copies it into a Lua object,
-    then pushs that object onto a stack. At this point, scripts and Lua
-    functions can manipulate the Lua object.
+ The "pushstring()" function takes a C string, copies it into a Lua object,
+ then pushs that object onto a stack. At this point, scripts and Lua
+ functions can manipulate the Lua object.
  
-    One such function is "setglobal()", which pops a Lua object off the stack
-    and assigns it to a global variable with the given name.
+ One such function is "setglobal()", which pops a Lua object off the stack
+ and assigns it to a global variable with the given name.
  
-    The "getglobal()" function works in reverse. It makes a copy of the named
-    global variable, then pushes it on the stack.
+ The "getglobal()" function works in reverse. It makes a copy of the named
+ global variable, then pushes it on the stack.
  
-    Functions like "tointeger()" and "tostring()" copy values out of the stack
-    back into C variables.
- */
+ Functions like "tointeger()" and "tostring()" copy values out of the stack
+ back into C variables.
+*/
 #include <stdio.h>
 #include "lua/lua.h"
 #include "lua/lauxlib.h"
