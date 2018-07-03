@@ -1,10 +1,13 @@
 
 CC = gcc
-CFLAGS = -Os
+CFLAGS = -Os -Wall
 
-all: hello01
+all: hello01 hello02
 
 hello01: lua/liblua.a hello01.c
+	$(CC) $(CFLAGS) $^ -o $@
+
+hello02: lua/liblua.a hello02.c
 	$(CC) $(CFLAGS) $^ -o $@
 
 lua/liblua.a:
