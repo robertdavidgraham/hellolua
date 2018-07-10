@@ -1,0 +1,4 @@
+*.o
+liblua.a
+lua
+luac

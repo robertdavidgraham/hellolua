@@ -223,7 +223,7 @@ void network_server(struct lua_State *L, int port_number)
         fprintf(stderr, "Selecting ...%d\n", nfds);
         
         /* Socket: find which sockets have incoming data */
-        x = select(nfds, &readset, &writeset, &errorset, 0);
+        x = select(nfds+1, &readset, &writeset, &errorset, 0);
         if (x < 0) {
             fprintf(stderr, "select: error %d\n", errno);
             break;
