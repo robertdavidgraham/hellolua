@@ -185,6 +185,8 @@ void network_server(struct lua_State *L, int port_number)
     }
     listen(fdsrv, 10);
     
+    fprintf(stderr, "Starting event loop...%d\n", fdsrv);
+    
     /*
      * Socket: Dispatch loop processing incoming data
      */
@@ -218,12 +220,15 @@ void network_server(struct lua_State *L, int port_number)
                 nfds = fd;
         }
         
+        fprintf(stderr, "Selecting ...%d\n", nfds);
+        
         /* Socket: find which sockets have incoming data */
         x = select(nfds, &readset, &writeset, &errorset, 0);
         if (x < 0) {
             fprintf(stderr, "select: error %d\n", errno);
             break;
         }
+        fprintf(stderr, "Selected = %d\n", x);
         
         /* Socket: handle new connections, if any */
         if (FD_ISSET(fdsrv, &readset) || FD_ISSET(fdsrv, &writeset)) {
@@ -283,14 +288,14 @@ int main(int argc, char *argv[])
     lua_State *L;
     int i;
     int x;
-    const char *filename = "hello05.lua";
+    const char *filename = "hello07.lua";
     int port_number;
     
     
     connections.next = &connections;
     connections.prev = &connections;
     
-    fprintf(stderr, "Running: hello05\n");
+    fprintf(stderr, "Running: hello07\n");
     
     /*
      * Create an instances of the Lua interpreter and register
@@ -362,7 +367,8 @@ int main(int argc, char *argv[])
     
 
    
-    
+    network_server(L, port_number);
+
     
     
  
