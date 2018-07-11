@@ -117,6 +117,9 @@
 		11DD354820F42C2800CBE1DE /* lapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lapi.c; path = ../../../lua/lapi.c; sourceTree = "<group>"; };
 		11DD354920F42C2800CBE1DE /* lauxlib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lauxlib.c; path = ../../../lua/lauxlib.c; sourceTree = "<group>"; };
 		11DD354A20F42C2800CBE1DE /* lparser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lparser.h; path = ../../../lua/lparser.h; sourceTree = "<group>"; };
+		11DD356E20F6684100CBE1DE /* hello07.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = hello07.md; path = ../../hello07.md; sourceTree = "<group>"; };
+		11DD356F20F698B200CBE1DE /* hello07.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = hello07.lua; path = ../../hello07.lua; sourceTree = "<group>"; };
+		11DD357020F698B200CBE1DE /* hello07-httpd.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "hello07-httpd.lua"; path = "../../hello07-httpd.lua"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +152,9 @@
 		11DD350320F42BD900CBE1DE /* hello07 */ = {
 			isa = PBXGroup;
 			children = (
+				11DD357020F698B200CBE1DE /* hello07-httpd.lua */,
+				11DD356F20F698B200CBE1DE /* hello07.lua */,
+				11DD356E20F6684100CBE1DE /* hello07.md */,
 				11DD350D20F42C0800CBE1DE /* lua */,
 				11DD350B20F42BF700CBE1DE /* hello07.c */,
 			);
