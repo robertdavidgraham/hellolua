@@ -14,7 +14,7 @@ onConnect = function(socket)
 	line = socket:receiveline();
 
 	-- Parse it
-    local method,url,major,minor = string.match(line, "(%a+)%s+(%g+)%s+HTTP/(%d+).(%d+)");
+	local method,url,major,minor = string.match(line, "(%a+)%s+(%g+)%s+HTTP/(%d+).(%d+)");
 
 	-- Continue receiving until we get end of request header
 	repeat
@@ -24,14 +24,14 @@ onConnect = function(socket)
 		end;
 	until line == "";
 
-    -- If the parse fails, return error
+	-- If the parse fails, return error
 	if method == nil or url == nil then
 		print(peer .. "method = nil");
-        socket:send("HTTP/1.1 400 Bad Request\r\nServer: hellolua07/1.0\r\n\r\n<h1>400 Bad request</h1>\r\n");
-        socket:close();
-        return;
-    end;
-
+		socket:send("HTTP/1.1 400 Bad Request\r\nServer: hellolua07/1.0\r\n\r\n<h1>400 Bad request</h1>\r\n");
+		socket:close();
+		return;
+	end;
+	
     -- Only support the GET method
     if method ~= "GET" then
         socket:send("HTTP/1.1 405 Method Not Allowed\r\nServer: hellolua07/1.0\r\n\r\n<h1>405 Method Not Allowed</h1>\r\n");
