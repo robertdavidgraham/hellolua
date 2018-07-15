@@ -73,7 +73,7 @@ int main(int argc, char *argv[])
      * The value -1 means the item at the top of the stack. Negative indexes count
      * from the top of the stack downward, and positive values from the bottom of the
      * stack upward. */
-    n = lua_tointeger(L, -1);
+    n = (int)lua_tointeger(L, -1);
     printf("hello03 = %d\n", n);
     
     /* We can also convert that value to a string (as strings and numbers are broadly

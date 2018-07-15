@@ -142,7 +142,7 @@ int main(int argc, char *argv[])
             fprintf(stderr, "Unexpected return argument, found %s, expected Number\n", lua_typename(L, lua_type(L,-1)));
             goto end;
         }
-        count = lua_tointeger(L, -1);
+        count = (size_t)lua_tointeger(L, -1);
         lua_pop(L, lua_gettop(L)); /*expected 1 item, but pop all items just in case */
         
         
@@ -167,7 +167,7 @@ int main(int argc, char *argv[])
             }
             printf("Yield hit, stack has %d item, with top item having value of %d\n",
                    lua_gettop(L), (int)lua_tointeger(L, -1));
-            count = lua_tointeger(L, -1);
+            count = (size_t)lua_tointeger(L, -1);
             lua_pop(L, lua_gettop(L));
         }
 

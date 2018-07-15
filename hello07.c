@@ -14,29 +14,35 @@
 #include "lua/lauxlib.h"
 #include "lua/lualib.h"
 
+/*
+ * This code compiles on Windows, macOS, and Linux, so we have to 
+ * mess around a bit to include the Windows socket stuff.
+ */
+#if defined(WIN32)
+#include <WinSock2.h>
+#include <WS2tcpip.h>
+#define WSA(err) (WSA##err)
+#define errnosocket WSAGetLastError()
+#else
 #include <arpa/inet.h>
-#include <sys/socket.h>
-#include <sys/types.h>
-#include <netinet/in.h>
-#include <unistd.h>
-#include <stdio.h>
 #include <errno.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <sys/types.h>
-#include <sys/socket.h>
 #include <netinet/in.h>
 #include <netdb.h>
-#include <stdio.h>
-#include <stdlib.h>
 #include <sys/ioctl.h>
 #include <sys/socket.h>
 #include <sys/time.h>
-#include <netinet/in.h>
-#include <errno.h>
+#include <sys/types.h>
+#include <unistd.h>
+#define errnosocket (errno)
+#define closesocket(fd) close(fd)
+#define ioctlsocket(a,b,d) ioctl(a,b,c)
+#define WSA(err) (err)
+#endif
 
-struct SocketWrapper connections;
-int connection_count;
+#if defined(_MSC_VER)
+#pragma comment(lib, "ws2_32")
+#endif
+
 
 /* Lua: As explained in previous examples, this will uniquely identify the type
  * of our object */
@@ -89,6 +95,12 @@ struct SocketWrapper
     char peerport[6];
 };
 
+/*
+ * Globals
+ */
+struct SocketWrapper connections;
+int connection_count;
+
 
 static void wrapper_close_socket(struct SocketWrapper *wrapper)
 {
@@ -96,7 +108,7 @@ static void wrapper_close_socket(struct SocketWrapper *wrapper)
         fprintf(stderr, "err: wrapper is NULL\n");
     }
     if (wrapper->fd > 0) {
-        close(wrapper->fd);
+        closesocket(wrapper->fd);
         wrapper->fd = -1;
     }
 }
@@ -189,7 +201,7 @@ static int socket_receive(struct lua_State *L)
     
     wrapper = luaL_checkudata(L, 1, MY_SOCKET_CLASS);
     if (lua_gettop(L) > 1) {
-        wrapper->byte_count = luaL_checkinteger(L, 2);
+        wrapper->byte_count = (size_t)luaL_checkinteger(L, 2);
     } else {
         wrapper->byte_count = 0; /* zero means "as many as you can" */
     }
@@ -208,7 +220,7 @@ static int socket_receiveline(struct lua_State *L)
     
     wrapper = luaL_checkudata(L, 1, MY_SOCKET_CLASS);
     if (lua_gettop(L) > 1) {
-        wrapper->byte_count = luaL_checkinteger(L, 2);
+        wrapper->byte_count = (size_t)luaL_checkinteger(L, 2);
     } else {
         wrapper->byte_count = 0; /* zero means "as many as you can" */
     }
@@ -244,7 +256,11 @@ void network_server(struct lua_State *L, int port_number)
     int fdsrv;
     struct sockaddr_in6 sin = {0};
     int x;
-    
+
+#ifdef WIN32
+    {WSADATA x; WSAStartup(0x101, &x);}
+#endif
+
     /* Socket: creat a server that listens on either IPv4 or IPv6 */
     fdsrv = socket(AF_INET6, SOCK_STREAM, 0);
     
@@ -252,7 +268,7 @@ void network_server(struct lua_State *L, int port_number)
     {
         int off = 0;
         if (setsockopt(fdsrv, IPPROTO_IPV6, IPV6_V6ONLY, (char *)&off, sizeof(off)) < 0) {
-            fprintf(stderr, "setsockopt(!IPV6_V6ONLY): %d\n", (int)errno);
+            fprintf(stderr, "setsockopt(!IPV6_V6ONLY): %d\n", (int)errnosocket);
         }
     }
     
@@ -261,7 +277,7 @@ void network_server(struct lua_State *L, int port_number)
     {
         int on = 1;
         if (setsockopt(fdsrv, SOL_SOCKET, SO_REUSEADDR, (char *)&on,sizeof(on)) < 0) {
-            fprintf(stderr, "setsockopt(SO_REUSEADDR): %d\n", (int)errno);
+            fprintf(stderr, "setsockopt(SO_REUSEADDR): %d\n", (int)errnosocket);
         }
     }
     
@@ -274,7 +290,7 @@ void network_server(struct lua_State *L, int port_number)
      * is already a server listening on that address. */
     x = bind(fdsrv, (struct sockaddr *)&sin, sizeof(sin));
     if (x < 0) {
-        fprintf(stderr, "bind(%d) failed %d\n", port_number, errno);
+        fprintf(stderr, "bind(%d) failed %d\n", port_number, errnosocket);
         exit(1);
     }
     listen(fdsrv, 10);
@@ -319,7 +335,7 @@ void network_server(struct lua_State *L, int port_number)
         /* Socket: find which sockets have incoming data */
         x = select(nfds+1, &readset, &writeset, &errorset, 0);
         if (x < 0) {
-            fprintf(stderr, "select: error %d\n", errno);
+            fprintf(stderr, "select: error %d\n", errnosocket);
             break;
         }
         fprintf(stderr, "Dispach: Selected\n");
@@ -334,18 +350,18 @@ void network_server(struct lua_State *L, int port_number)
             fd = accept(fdsrv, (struct sockaddr*)&client, &sizeof_client);
             if (fd < 0) {
                 /* Socket: some error occured */
-                fprintf(stderr, "accept(): error %d\n", errno);
+                fprintf(stderr, "accept(): error %d\n", errnosocket);
             } else if (connection_count >= 30) {
                 /* Socket: if we hit the incoming select() connection limit, discard the connection */
-                close(fd);
+                closesocket(fd);
             } else {
                 int x;
                 int on = 1;
                 
                 /* Socket: mark this as non-blocking, which we don't really need for receiving data,
                  * but we do need for sending, incase the send() function blocks on large sends */
-                if (ioctl(fd, FIONBIO, (char *)&on)) {
-                    fprintf(stderr, "ioctl(FIONBIO) failed %d\n", errno);
+                if (ioctlsocket(fd, FIONBIO, (void *)&on)) {
+                    fprintf(stderr, "ioctl(FIONBIO) failed %d\n", errnosocket);
                 }
                 
                 /* Lua: create a  wrapper object and push it onto the stack */
@@ -439,7 +455,7 @@ void network_server(struct lua_State *L, int port_number)
                 
                 /* See if an error occured */
                 if (bytes_read <= 0) {
-                    fprintf(stderr, "[%s]:%s:C: error reading from socket %d\n", wrapper->peername, wrapper->peerport, errno);
+                    fprintf(stderr, "[%s]:%s:C: error reading from socket %d\n", wrapper->peername, wrapper->peerport, errnosocket);
                     wrapper = wrapper_close_all(wrapper);
                     continue;
                 }
@@ -465,7 +481,7 @@ void network_server(struct lua_State *L, int port_number)
                 /* Peek at the bytes  */
                 bytes_read = recv(fd, buf, sizeof(buf), MSG_PEEK);
                 if (bytes_read <= 0) {
-                    fprintf(stderr, "[%s]:%s:C: error reading from socket %d\n", wrapper->peername, wrapper->peerport, errno);
+                    fprintf(stderr, "[%s]:%s:C: error reading from socket %d\n", wrapper->peername, wrapper->peerport, errnosocket);
                     wrapper = wrapper_close_all(wrapper);
                     continue;
                 }
@@ -496,7 +512,7 @@ void network_server(struct lua_State *L, int port_number)
                 /* Now do a real, non-peek read */
                 bytes_read = recv(fd, wrapper->buf + wrapper->bytes_done, newline, 0);
                 if (bytes_read <= 0) {
-                    fprintf(stderr, "[%s]:%s:C: error reading from socket %d\n", wrapper->peername, wrapper->peerport, errno);
+                    fprintf(stderr, "[%s]:%s:C: error reading from socket %d\n", wrapper->peername, wrapper->peerport, errnosocket);
                     wrapper = wrapper_close_all(wrapper);
                     continue;
                 } else
@@ -525,7 +541,7 @@ void network_server(struct lua_State *L, int port_number)
                 
                 /* See if an error occured */
                 if (bytes_written <= 0) {
-                    fprintf(stderr, "[%s]:%s:C: send error %d (wanted %d bytes)\n", wrapper->peername, wrapper->peerport, (int)errno, (int)bytes_to_write);
+                    fprintf(stderr, "[%s]:%s:C: send error %d (wanted %d bytes)\n", wrapper->peername, wrapper->peerport, (int)errnosocket, (int)bytes_to_write);
                     wrapper = wrapper_close_all(wrapper);
                     continue;
                 } else
@@ -546,7 +562,7 @@ void network_server(struct lua_State *L, int port_number)
                 return_items = 0;
 
             } else if (FD_ISSET(fd, &errorset)) {
-                fprintf(stderr, "Socket error: %d\n", errno);
+                fprintf(stderr, "Socket error: %d\n", errnosocket);
                 wrapper = wrapper_close_all(wrapper);
                 continue;
             } else {
