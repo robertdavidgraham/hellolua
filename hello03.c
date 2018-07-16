@@ -107,6 +107,7 @@ int main(int argc, char *argv[])
      * terminating the script in the middle. The garbage collector will clean
      * up any memory allocated that's now been discarded.
      */
+    fprintf(stderr, "The following error is supposed to happen\n");
     x = luaL_dostring(L, "printx(nil)");
     if (x != LUA_OK) {
         fprintf(stderr, "error: %s\n", lua_tostring(L, -1));
