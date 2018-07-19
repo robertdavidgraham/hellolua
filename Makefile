@@ -26,7 +26,7 @@ bin/hello07: hello07.c lua/liblua.a
 	$(CC) $(CFLAGS) $^ -o $@
 
 bin/hello08: hello08.c stub-lua.c
-	$(CC) $(CFLAGS) $^ -o $@
+	$(CC) $(CFLAGS) -ldl $^ -o $@
 
 lua/liblua.a:
 	make -C lua generic

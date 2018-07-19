@@ -10,6 +10,7 @@ int stublua_init(void)
     
     {
         static const char *possible_names[] = {
+	    "liblua5.3.so.0.0.0",
             "liblua.5.3.5.dylib",
             "liblua.5.3.dylib",
             "liblua5.3.dylib",
