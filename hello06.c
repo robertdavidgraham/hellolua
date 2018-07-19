@@ -50,6 +50,8 @@ int main(int argc, char *argv[])
     fprintf(stderr, "Running: hello06\n");
     fprintf(stderr, "Creating interpreter instance/VM\n");
     
+    fprintf(stderr, "sizeof(LUA_INTEGER) = %u-bytes\n", (unsigned)sizeof(LUA_INTEGER));
+    
     /*
      * Create an instance with my own allocation function, instead of the default
      * one normally used.

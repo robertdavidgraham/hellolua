@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
 #include "lua/lua.h"
 #include "lua/lauxlib.h"
 #include "lua/lualib.h"
@@ -35,7 +36,7 @@
 #include <unistd.h>
 #define errnosocket (errno)
 #define closesocket(fd) close(fd)
-#define ioctlsocket(a,b,d) ioctl(a,b,c)
+#define ioctlsocket(a,b,c) ioctl(a,b,c)
 #define WSA(err) (err)
 #endif
 
