@@ -31,6 +31,7 @@
 		11DD361520FF05BF00CBE1DE /* stub-lua.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = "stub-lua.c"; path = "../../../stub-lua.c"; sourceTree = "<group>"; };
 		11DD36182100D8C200CBE1DE /* libdl.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libdl.tbd; path = usr/lib/libdl.tbd; sourceTree = SDKROOT; };
 		11DD361A2100D92800CBE1DE /* libSystem.B.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libSystem.B.dylib; path = ../../../../../usr/lib/libSystem.B.dylib; sourceTree = "<group>"; };
+		11DD363121051B5400CBE1DE /* hello08.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = hello08.md; path = ../../hello08.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,6 +49,7 @@
 		11DD358620FBF3AA00CBE1DE = {
 			isa = PBXGroup;
 			children = (
+				11DD363121051B5400CBE1DE /* hello08.md */,
 				11DD359120FBF3AA00CBE1DE /* hello08 */,
 				11DD359020FBF3AA00CBE1DE /* Products */,
 				11DD36172100D8C100CBE1DE /* Frameworks */,

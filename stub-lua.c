@@ -9,16 +9,29 @@ int stublua_init(void)
     void *lib = NULL;
     
     {
+#if defined(__APPLE__)
         static const char *possible_names[] = {
-            "liblua5.3.so",
-            "liblua5.3.so.0",
-            "liblua5.3.so.0.0.0",
+
             "liblua.5.3.5.dylib",
             "liblua.5.3.dylib",
             "liblua5.3.dylib",
             "liblua.dylib",
             0
         };
+#elif defined(WIN32) || defined(WIN64) || defined(_WIN32) || defined(_WIN64)
+        static const char *possible_names[] = {
+            "lua53.dll",
+            "lua.dll",
+            0
+        };
+#else
+        static const char *possible_names[] = {
+            "liblua5.3.so",
+            "liblua5.3.so.0",
+            "liblua5.3.so.0.0.0",
+            0
+        };
+#endif
         unsigned i;
         for (i=0; possible_names[i]; i++) {
             lib = dlopen(possible_names[i], RTLD_LAZY);
