@@ -7,13 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		11DD359A20FBF3D000CBE1DE /* hello08.c in Sources */ = {isa = PBXBuildFile; fileRef = 11DD359920FBF3D000CBE1DE /* hello08.c */; };
-		11DD361620FF05C000CBE1DE /* stub-lua.c in Sources */ = {isa = PBXBuildFile; fileRef = 11DD361520FF05BF00CBE1DE /* stub-lua.c */; };
-		11DD361B2100D92800CBE1DE /* libSystem.B.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 11DD361A2100D92800CBE1DE /* libSystem.B.dylib */; };
+		119724AB21A9F80D0072DEC2 /* hello01.c in Sources */ = {isa = PBXBuildFile; fileRef = 119724AA21A9F80D0072DEC2 /* hello01.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		11DD358D20FBF3AA00CBE1DE /* CopyFiles */ = {
+		1197249E21A9F7120072DEC2 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = /usr/share/man/man1/;
@@ -25,129 +23,109 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		11DD358F20FBF3AA00CBE1DE /* hello08 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = hello08; sourceTree = BUILT_PRODUCTS_DIR; };
-		11DD359920FBF3D000CBE1DE /* hello08.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = hello08.c; path = ../../../hello08.c; sourceTree = "<group>"; };
-		11DD361420FF05BF00CBE1DE /* stub-lua.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "stub-lua.h"; path = "../../../stub-lua.h"; sourceTree = "<group>"; };
-		11DD361520FF05BF00CBE1DE /* stub-lua.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = "stub-lua.c"; path = "../../../stub-lua.c"; sourceTree = "<group>"; };
-		11DD36182100D8C200CBE1DE /* libdl.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libdl.tbd; path = usr/lib/libdl.tbd; sourceTree = SDKROOT; };
-		11DD361A2100D92800CBE1DE /* libSystem.B.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libSystem.B.dylib; path = ../../../../../usr/lib/libSystem.B.dylib; sourceTree = "<group>"; };
-		11DD363121051B5400CBE1DE /* hello08.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = hello08.md; path = ../../hello08.md; sourceTree = "<group>"; };
+		119724A021A9F7120072DEC2 /* hello01 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = hello01; sourceTree = BUILT_PRODUCTS_DIR; };
+		119724AA21A9F80D0072DEC2 /* hello01.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = hello01.c; path = ../../../hello01.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		11DD358C20FBF3AA00CBE1DE /* Frameworks */ = {
+		1197249D21A9F7120072DEC2 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				11DD361B2100D92800CBE1DE /* libSystem.B.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		11DD358620FBF3AA00CBE1DE = {
+		1197249721A9F7120072DEC2 = {
 			isa = PBXGroup;
 			children = (
-				11DD363121051B5400CBE1DE /* hello08.md */,
-				11DD359120FBF3AA00CBE1DE /* hello08 */,
-				11DD359020FBF3AA00CBE1DE /* Products */,
-				11DD36172100D8C100CBE1DE /* Frameworks */,
+				119724A221A9F7120072DEC2 /* hello01 */,
+				119724A121A9F7120072DEC2 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		11DD359020FBF3AA00CBE1DE /* Products */ = {
+		119724A121A9F7120072DEC2 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				11DD358F20FBF3AA00CBE1DE /* hello08 */,
+				119724A021A9F7120072DEC2 /* hello01 */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		11DD359120FBF3AA00CBE1DE /* hello08 */ = {
+		119724A221A9F7120072DEC2 /* hello01 */ = {
 			isa = PBXGroup;
 			children = (
-				11DD361520FF05BF00CBE1DE /* stub-lua.c */,
-				11DD361420FF05BF00CBE1DE /* stub-lua.h */,
-				11DD359920FBF3D000CBE1DE /* hello08.c */,
+				119724AA21A9F80D0072DEC2 /* hello01.c */,
 			);
-			path = hello08;
-			sourceTree = "<group>";
-		};
-		11DD36172100D8C100CBE1DE /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				11DD361A2100D92800CBE1DE /* libSystem.B.dylib */,
-				11DD36182100D8C200CBE1DE /* libdl.tbd */,
-			);
-			name = Frameworks;
+			path = hello01;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		11DD358E20FBF3AA00CBE1DE /* hello08 */ = {
+		1197249F21A9F7120072DEC2 /* hello01 */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 11DD359620FBF3AA00CBE1DE /* Build configuration list for PBXNativeTarget "hello08" */;
+			buildConfigurationList = 119724A721A9F7120072DEC2 /* Build configuration list for PBXNativeTarget "hello01" */;
 			buildPhases = (
-				11DD358B20FBF3AA00CBE1DE /* Sources */,
-				11DD358C20FBF3AA00CBE1DE /* Frameworks */,
-				11DD358D20FBF3AA00CBE1DE /* CopyFiles */,
+				1197249C21A9F7120072DEC2 /* Sources */,
+				1197249D21A9F7120072DEC2 /* Frameworks */,
+				1197249E21A9F7120072DEC2 /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = hello08;
-			productName = hello08;
-			productReference = 11DD358F20FBF3AA00CBE1DE /* hello08 */;
+			name = hello01;
+			productName = hello01;
+			productReference = 119724A021A9F7120072DEC2 /* hello01 */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		11DD358720FBF3AA00CBE1DE /* Project object */ = {
+		1197249821A9F7120072DEC2 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0940;
-				ORGANIZATIONNAME = "Robert Graham";
+				LastUpgradeCheck = 1000;
+				ORGANIZATIONNAME = "Martin Woodford";
 				TargetAttributes = {
-					11DD358E20FBF3AA00CBE1DE = {
-						CreatedOnToolsVersion = 9.4;
+					1197249F21A9F7120072DEC2 = {
+						CreatedOnToolsVersion = 10.0;
 					};
 				};
 			};
-			buildConfigurationList = 11DD358A20FBF3AA00CBE1DE /* Build configuration list for PBXProject "hello08" */;
+			buildConfigurationList = 1197249B21A9F7120072DEC2 /* Build configuration list for PBXProject "hello01" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 			);
-			mainGroup = 11DD358620FBF3AA00CBE1DE;
-			productRefGroup = 11DD359020FBF3AA00CBE1DE /* Products */;
+			mainGroup = 1197249721A9F7120072DEC2;
+			productRefGroup = 119724A121A9F7120072DEC2 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				11DD358E20FBF3AA00CBE1DE /* hello08 */,
+				1197249F21A9F7120072DEC2 /* hello01 */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		11DD358B20FBF3AA00CBE1DE /* Sources */ = {
+		1197249C21A9F7120072DEC2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				11DD361620FF05C000CBE1DE /* stub-lua.c in Sources */,
-				11DD359A20FBF3D000CBE1DE /* hello08.c in Sources */,
+				119724AB21A9F80D0072DEC2 /* hello01.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		11DD359420FBF3AA00CBE1DE /* Debug */ = {
+		119724A521A9F7120072DEC2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -199,13 +177,14 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
-				MTL_ENABLE_DEBUG_INFO = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 			};
 			name = Debug;
 		};
-		11DD359520FBF3AA00CBE1DE /* Release */ = {
+		119724A621A9F7120072DEC2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -252,11 +231,12 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
 			};
 			name = Release;
 		};
-		11DD359720FBF3AA00CBE1DE /* Debug */ = {
+		119724A821A9F7120072DEC2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -264,7 +244,7 @@
 			};
 			name = Debug;
 		};
-		11DD359820FBF3AA00CBE1DE /* Release */ = {
+		119724A921A9F7120072DEC2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -275,25 +255,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		11DD358A20FBF3AA00CBE1DE /* Build configuration list for PBXProject "hello08" */ = {
+		1197249B21A9F7120072DEC2 /* Build configuration list for PBXProject "hello01" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				11DD359420FBF3AA00CBE1DE /* Debug */,
-				11DD359520FBF3AA00CBE1DE /* Release */,
+				119724A521A9F7120072DEC2 /* Debug */,
+				119724A621A9F7120072DEC2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		11DD359620FBF3AA00CBE1DE /* Build configuration list for PBXNativeTarget "hello08" */ = {
+		119724A721A9F7120072DEC2 /* Build configuration list for PBXNativeTarget "hello01" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				11DD359720FBF3AA00CBE1DE /* Debug */,
-				11DD359820FBF3AA00CBE1DE /* Release */,
+				119724A821A9F7120072DEC2 /* Debug */,
+				119724A921A9F7120072DEC2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 11DD358720FBF3AA00CBE1DE /* Project object */;
+	rootObject = 1197249821A9F7120072DEC2 /* Project object */;
 }
